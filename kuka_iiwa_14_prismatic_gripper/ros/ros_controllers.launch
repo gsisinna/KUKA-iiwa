@@ -5,7 +5,7 @@
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/iiwa" args="PositionJointInterface_J1_controller PositionJointInterface_J2_controller PositionJointInterface_J3_controller PositionJointInterface_J4_controller PositionJointInterface_J5_controller PositionJointInterface_J6_controller PositionJointInterface_J7_controller joint_state_controller"/>
+    output="screen" ns="/iiwa" args="PositionJointInterface_J1_controller PositionJointInterface_J2_controller PositionJointInterface_J3_controller PositionJointInterface_J4_controller PositionJointInterface_J5_controller PositionJointInterface_J6_controller PositionJointInterface_J7_controller VelocityJointInterface_J1_controller VelocityJointInterface_J2_controller VelocityJointInterface_J3_controller VelocityJointInterface_J4_controller VelocityJointInterface_J5_controller VelocityJointInterface_J6_controller VelocityJointInterface_J7_controller joint_state_controller"/>
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
