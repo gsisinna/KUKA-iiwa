@@ -371,12 +371,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_1">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_1">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -384,12 +384,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_2">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_2">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -397,12 +397,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_3">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_3">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -410,12 +410,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_4">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_4">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -423,12 +423,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_5">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_5">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -436,12 +436,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_6">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_6">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -449,12 +449,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_7">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_7">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -546,12 +546,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_left_joint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="gripper_motor_left">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
@@ -559,12 +559,12 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_right_joint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_right">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <!--<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>-->
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
