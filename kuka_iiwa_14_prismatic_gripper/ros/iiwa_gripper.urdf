@@ -47,14 +47,14 @@
       <geometry>
         <mesh filename="package://kuka_iiwa_14_prismatic_gripper/meshes/visual/link_0.stl"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="Orange"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://kuka_iiwa_14_prismatic_gripper/meshes/collision/link_0.stl"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="Orange"/>
     </collision>
     <self_collision_checking>
       <origin rpy="0 0 0" xyz="0 0 0"/>
@@ -270,14 +270,14 @@
       <geometry>
         <mesh filename="package://kuka_iiwa_14_prismatic_gripper/meshes/visual/link_7.stl"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="Orange"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
         <mesh filename="package://kuka_iiwa_14_prismatic_gripper/meshes/collision/link_7.stl"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="Orange"/>
     </collision>
   </link>
   <joint name="iiwa_joint_ee" type="fixed">
@@ -371,11 +371,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_1">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_1">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -384,11 +384,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_2">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_2">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -397,11 +397,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_3">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_3">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -410,11 +410,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_4">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_4">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -423,11 +423,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_5">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_5">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -436,11 +436,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_6">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_6">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -449,11 +449,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="iiwa_joint_7">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_7">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -546,11 +546,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_left_joint">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="gripper_motor_left">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -559,11 +559,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_right_joint">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_right">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
