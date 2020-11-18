@@ -40,12 +40,12 @@ arm_j7_position_controller:
   pid: {p: 100.0, i: 0.1, d: 0.0, i_clamp_min: -10000, i_clamp_max: 10000}
 
 gripper_left_effort_controllers:
-  type: effort_controllerss/JointEffortController
+  type: effort_controllers/JointEffortController
   joint: gripper_left_joint
   pid: {p: 10.0, i: 0.0, d: 0.1, i_clamp_min: -1, i_clamp_max: 1}
 
 gripper_right_effort_controllers:
-  type: effort_controllerss/JointEffortController
+  type: effort_controllers/JointEffortController
   joint: gripper_right_joint
   pid: {p: 10.0, i: 0.0, d: 0.1, i_clamp_min: -1, i_clamp_max: 1}
 
@@ -126,9 +126,9 @@ arm_j7_effort_controllers:
   type: effort_controllers/JointEffortController
   joint: iiwa_joint_7
 
-iiwa_effort_controllers:
-  #type: position_controllers/JointTrajectoryController
+iiwa_effort_controller:
   type: effort_controllers/JointGroupEffortController
+  #type: effort_controllers/JointGroupEffortController
   joints:
     - iiwa_joint_1
     - iiwa_joint_2
@@ -137,6 +137,42 @@ iiwa_effort_controllers:
     - iiwa_joint_5
     - iiwa_joint_6
     - iiwa_joint_7
+  gains:
+    iiwa_joint_1:
+      p: 8000
+      d: 100
+      i: 100
+      i_clamp: 10000
+    iiwa_joint_2:
+      p: 8000
+      d: 100
+      i: 100
+      i_clamp: 10000
+    iiwa_joint_3:
+      p: 8000
+      d: 100
+      i: 10
+      i_clamp: 10000
+    iiwa_joint_4:
+      p: 8000
+      d: 100
+      i: 10
+      i_clamp: 10000
+    iiwa_joint_5:
+      p: 3000
+      d: 100
+      i: 5
+      i_clamp: 10000
+    iiwa_joint_6:
+      p: 500
+      d: 100
+      i: 1
+      i_clamp: 10000
+    iiwa_joint_7:
+      p: 100
+      d: 100
+      i: 1
+      i_clamp: 1   
   
 grasp_effort_controllers:
   type: effort_controllers/JointTrajectoryController
@@ -203,7 +239,7 @@ gripper_right_velocity_controller:
   pid: {p: 10.0, i: 1, d: 100.0, i_clamp_min: -1, i_clamp_max: 1}
 
 iiwa_velocity_controller:
-  type: effort_controllerss/JointGroupVelocityController
+  type: effort_controllers/JointGroupEffortController
   #type: effort_controllers/JointVelocityController
   joints:
     - iiwa_joint_1
