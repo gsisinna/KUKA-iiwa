@@ -1,0 +1,235 @@
+gabriele@PC:~$ cle-start
+[1] 5794
+... logging to /home/gabriele/.ros/log/5c198388-2ffd-11eb-bded-3c6aa7e3ba25/roslaunch-PC-5794.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+
+started roslaunch server http://127.0.0.1:46465/
+ros_comm version 1.14.10
+
+
+SUMMARY
+========
+
+PARAMETERS
+ * /rosdistro: melodic
+ * /rosversion: 1.14.10
+
+NODES
+
+auto-starting new master
+process[master]: started with pid [5805]
+ROS_MASTER_URI=http://127.0.0.1:11311/
+
+setting /run_id to 5c198388-2ffd-11eb-bded-3c6aa7e3ba25
+process[rosout-1]: started with pid [5816]
+started core service [/rosout]
+[2] 5823
+[ INFO] [1606405079.389296640]: Waiting For connections on 0.0.0.0:8081
+[3] 5845
+Traceback (most recent call last):
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_cleserver/hbp_nrp_cleserver/server/ROSCLESimulationFactory.py", line 43, in <module>
+    from hbp_nrp_cleserver.server.PlaybackServer import PlaybackSimulationAssembly
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_cleserver/hbp_nrp_cleserver/server/PlaybackServer.py", line 38, in <module>
+    from hbp_nrp_cleserver.server.CLEGazeboSimulationAssembly import GazeboSimulationAssembly
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_cleserver/hbp_nrp_cleserver/server/CLEGazeboSimulationAssembly.py", line 35, in <module>
+    from hbp_nrp_backend.storage_client_api.StorageClient import StorageClient, Model
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_backend/hbp_nrp_backend/storage_client_api/StorageClient.py", line 39, in <module>
+    from hbp_nrp_commons.sim_config.SimConfig import ResourceType
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_commons/hbp_nrp_commons/sim_config/SimConfig.py", line 34, in <module>
+    from hbp_nrp_cle.robotsim.RobotManager import Robot
+  File "/home/gabriele/Documents/NRP/CLE/hbp_nrp_cle/hbp_nrp_cle/robotsim/RobotManager.py", line 35, in <module>
+    from .GazeboHelper import GazeboHelper
+  File "/home/gabriele/Documents/NRP/CLE/hbp_nrp_cle/hbp_nrp_cle/robotsim/GazeboHelper.py", line 38, in <module>
+    from gazebo_msgs.srv import SpawnEntity, GetWorldProperties, SetModelState, \
+ImportError: cannot import name SpawnEntity
+[3]+  Uscita 1                $HOME/.opt/platform_venv/bin/python $HBP/ExDBackend/hbp_nrp_cleserver/hbp_nrp_cleserver/server/ROSCLESimulationFactory.py
+[3] 5857
+[uWSGI] getting INI configuration from /home/gabriele/.local/etc/nginx/uwsgi-nrp.ini
+*** Starting uWSGI 2.0.15-debian (64bit) on [Thu Nov 26 16:38:01 2020] ***
+compiled with version: 7.3.0 on 28 September 2018 15:41:15
+os: Linux-5.4.0-54-generic #60~18.04.1-Ubuntu SMP Fri Nov 6 17:25:16 UTC 2020
+nodename: PC
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 8
+current working directory: /home/gabriele
+detected binary path: /usr/bin/uwsgi-core
+dropping root privileges as early as possible
+chdir() to /home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_backend/
+*** WARNING: you are running uWSGI without its master process manager ***
+your processes number limit is 31244
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /tmp/nrp-services.sock fd 3
+dropping root privileges after socket binding
+Python version: 2.7.17 (default, Sep 30 2020, 13:38:04)  [GCC 7.5.0]
+Set PythonHome to /home/gabriele/.opt/platform_venv
+Python main interpreter initialized at 0x55dae5d00420
+dropping root privileges after plugin initialization
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 144896 bytes (141 KB) for 8 cores
+*** Operational MODE: threaded ***
+Traceback (most recent call last):
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_backend/hbp_nrp_backend/runserver.py", line 32, in <module>
+    from hbp_nrp_backend.rest_server import app
+  File "./hbp_nrp_backend/rest_server/__init__.py", line 83, in <module>
+    from hbp_nrp_backend.rest_server.__SimulationResources import SimulationResources
+  File "./hbp_nrp_backend/rest_server/__SimulationResources.py", line 34, in <module>
+    from hbp_nrp_backend.rest_server.__SimulationControl import _get_simulation_or_abort
+  File "./hbp_nrp_backend/rest_server/__SimulationControl.py", line 40, in <module>
+    from hbp_nrp_backend.simulation_control import simulations, Simulation
+  File "./hbp_nrp_backend/simulation_control/__init__.py", line 12, in <module>
+    from hbp_nrp_backend.simulation_control.__Simulation import Simulation
+  File "./hbp_nrp_backend/simulation_control/__Simulation.py", line 32, in <module>
+    from hbp_nrp_backend.simulation_control.__BackendSimulationLifecycle import \
+  File "./hbp_nrp_backend/simulation_control/__BackendSimulationLifecycle.py", line 40, in <module>
+    from hbp_nrp_backend.__UserAuthentication import UserAuthentication
+  File "./hbp_nrp_backend/__UserAuthentication.py", line 35, in <module>
+    from hbp_nrp_backend.storage_client_api.StorageClient import StorageClient
+  File "./hbp_nrp_backend/storage_client_api/StorageClient.py", line 39, in <module>
+    from hbp_nrp_commons.sim_config.SimConfig import ResourceType
+  File "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_commons/hbp_nrp_commons/sim_config/SimConfig.py", line 34, in <module>
+    from hbp_nrp_cle.robotsim.RobotManager import Robot
+  File "/home/gabriele/Documents/NRP/CLE/hbp_nrp_cle/hbp_nrp_cle/robotsim/RobotManager.py", line 35, in <module>
+    from .GazeboHelper import GazeboHelper
+  File "/home/gabriele/Documents/NRP/CLE/hbp_nrp_cle/hbp_nrp_cle/robotsim/GazeboHelper.py", line 38, in <module>
+    from gazebo_msgs.srv import SpawnEntity, GetWorldProperties, SetModelState, \
+ImportError: cannot import name SpawnEntity
+unable to load app 0 (mountpoint='') (callable not found or import error)
+*** no app loaded. going in full dynamic mode ***
+dropping root privileges after application loading
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI worker 1 (and the only) (pid: 5859, cores: 8)
+[4] 5877
+[rospack] Error: package 'rosbridge_server' not found
+
+gabriele@PC:~$ 
+> nrp_backend_proxy@3.0.0 start /home/gabriele/Documents/NRP/nrpBackendProxy
+> NODE_ENV=production node_modules/ts-node/dist/bin.js app.ts
+
+2020-11-26 16:38:03 GMT+0100 Polling Backend Servers for Experiments, Health & Running Simulations every 5000 ms.
+2020-11-26 16:38:03 GMT+0100 Daint-cscs config not in the config.json, you will not be able to start any jobs on the supercomputer
+2020-11-26 16:38:03 GMT+0100 Listening on port: 8443
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/benchmark_p3dx/BenchmarkPioneer.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_all_devices/ExDXMLExample_holodeck_all_devices.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_directnest_all_devices/braitenberg_husky_directnest_all_devices.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_distributed/ExDDistributedBrainHusky.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_spinnaker_extended/ExDExtendedBrainHuskySpinnaker.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_csv_recorders/ExDXMLExample_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_csv_recorders/ExDXMLExample_holodeck_csv_recorders.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_spinnaker/experiment.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck_directnest/braitenberg_husky_holodeck_directnest.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_icub/experiment_configuration.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_sbc/ExDBraitenbergHuskySBC.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky/ExDXMLExample.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_husky_holodeck/ExDXMLExample_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_lauron_sbc/ExDBraitenbergLauronSBC.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_mouse_lab/ExDBraitenbergMouseLab.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_lauron/ExDBraitenbergLauron.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_mouse_holodeck_lab/ExDBraitenbergMouseHoloLab.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_mouse/ExDBraitenbergMouse.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/braitenberg_nengo/HuskyBraitenbergNengo.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/cdp1_mouse_holodeck/ExDMouseCDP1_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/cdp1_mouse_tactile/ExDMouseCDP1_tactile.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/docked_mouse/ExDDockedMouse.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/demo_dvs_icub/ExDDvsIcub.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/demo_husky_sbc/ExDDemoHuskySBC.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/dvs_robot_head/ExDDvsRobotHead.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/iba_holodeck/iba_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/cdp1_mouse/ExDMouseCDP1.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/Energy_Arm/experiment_configuration.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/iCub_VOR_UGR_nest/iCub_VOR_UGR_nest.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/interactive_manipulation/ExDInteractiveManipulation.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/iCub_VOR_UGR/iCub_VOR_UGR.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/manipulation_force/ExDManipulationForce.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/lamprey_swimming/lamprey_swimming.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/manipulation_holodeck/ExDManipulation_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/manipulation/ExDManipulation.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/manipulation_RL/ExDManipulationRL.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/mooc_miniproject0/miniproject0.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/mooc_miniproject2/miniproject2.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/mooc_miniproject1/miniproject1.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/multiple_robots_tutorial/MultipleRobots.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/manipulation_force_holodeck/ExDManipulationForce_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/myoarm_small/Myo_small.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/myoarm_nst/Myo_NST.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/neuronal_red_detection_directnest/NeuronalRedDetection_Husky_dnest.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/nao/ExDNao.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/NeuroControl_Leg/experiment_configuration.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/neuronal_red_detection_holodeck/NeuronalRedDetection_Husky_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/neuronal_red_detection_distributed/NeuronalRedDetection_Husky_distr.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/pybullet_ant/ExDPyBulletAnt.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/neuronal_red_detection/NeuronalRedDetection_Husky.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/retina_icub/ExDRetinaICubTrackingRG.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/opensim_knee_jerk_tut/ExDOpensimTut.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/roboy/roboy.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/retina_mockup/ExDRetinaICubMockup.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/screen_switching_holodeck/ScreenSwitchingHuskyExperiment_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/screen_switching/ScreenSwitchingHuskyExperiment.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/spinnaker_in_car/spinnaker_in_car.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_fluid/template_fluid.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_husky_timeout/ExDTemplateHuskyTimeout.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_husky/ExDTemplateHusky.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_icub_holodeck/ExDTemplateICubHolodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_icub/ExDTemplateICub.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_lauron_docked/ExDTemplateDockedLauron.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_lauron/ExDTemplateLauron.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_mmm/ExDTemplateMMM.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_mouse/ExDTemplateMouseV2.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_new/TemplateNew.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_pioneer/ExDTemplatePioneer.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tigrillo-cl-ann-learning/ExDTigrilloANNFORCElight.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/demo_mouse_lab/ExDMouseLabExample.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/demo_manipulation/ExDDemoManipulation.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/template_manipulation/ExDTemplateManipulation.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tigrillo-cl-replay/ExDTigrillo_Replay.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tutorial_baseball_exercise/ExDTutorialBaseballExercise.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tutorial_baseball_solution/ExDTutorialBaseballSolution.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tigrillo-tf-cpg/experiment_config.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tigrillo-cl-snn-learning/ExDTigrillo.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tutorial_debugging/tutorial_debugging.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tutorial_tensorflow_husky/TensorFlowTutorial.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/tutorial_visualizer/Visualizer_official.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/visual_tracking_icub_holodeck/ExDVisualTrackingICub_holodeck.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/user-avatar_test-environment/user-avatar_test-env.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/visual_tracking_icub/ExDVisualTrackingICub.exc
+2020-11-26 16:38:03 GMT+0100 Parsing experiment file /home/gabriele/Documents/NRP/Experiments/zip_robot/ExDXMLExampleRobotZip.exc
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+2020-11-26 16:38:03 GMT+0100 Failed to execute request http://localhost:8080/health/errors. ERROR: Error: Status code: 500
+Internal Server Error
+2020-11-26 16:38:03 GMT+0100 Failed to execute request http://localhost:8080/simulation. ERROR: Error: Status code: 500
+Internal Server Error
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+2020-11-26 16:38:08 GMT+0100 Failed to execute request http://localhost:8080/health/errors. ERROR: Error: Status code: 500
+Internal Server Error
+2020-11-26 16:38:08 GMT+0100 Failed to execute request http://localhost:8080/simulation. ERROR: Error: Status code: 500
+Internal Server Error
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+2020-11-26 16:38:13 GMT+0100 Failed to execute request http://localhost:8080/health/errors. ERROR: Error: Status code: 500
+Internal Server Error
+2020-11-26 16:38:13 GMT+0100 Failed to execute request http://localhost:8080/simulation. ERROR: Error: Status code: 500
+Internal Server Error
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+2020-11-26 16:38:18 GMT+0100 Failed to execute request http://localhost:8080/health/errors. ERROR: Error: Status code: 500
+Internal Server Error
+2020-11-26 16:38:18 GMT+0100 Failed to execute request http://localhost:8080/simulation. ERROR: Error: Status code: 500
+Internal Server Error
+--- no python application found, check your startup logs for errors ---
+--- no python application found, check your startup logs for errors ---
+2020-11-26 16:38:23 GMT+0100 Failed to execute request http://localhost:8080/health/errors. ERROR: Error: Status code: 500
+Internal Server Error
+2020-11-26 16:38:23 GMT+0100 Failed to execute request http://localhost:8080/simulation. ERROR: Error: Status code: 500
+Internal Server Error
+--- no python application found, check your startup logs for errors ---
+

@@ -1,0 +1,50 @@
+Inverse kinematics instructions
+
+Creare due nodi ROS, uno che implementi la cinematica inversa del robot e uno che generi la traiettoria desiderata per l'end-effector.
+
+I nodi possono essere creati all'interno del pacchetto kuka_iiwa_14_prismatic_gripper
+
+Per i passaggi da seguire per la creazione di un nodo e per compilarlo, riferirsi al tutorial beginner di ROS
+
+## CINEMATICA INVERSA
+
+- per l'inversione della cinematica utilizzare la tecnica basata su pseudo-inversa del Jacobiano + proiettore P nel null-space del Jacobiano
+- per garantire convergenza dell'end-effector alla traiettoria desiderata associare l'inversione della cinematica alla CLIK (Closed-Loop Inverse Kinematics)
+
+Interfaccia di controllo di basso livello: effort_controllers/JointPositionController.
+
+- subscriber: valori attuali delle variabili di giunto "q" (topic iiwa/joint_state), necessari per il calcolo del Jacobiano e della posa attuale dell'end-effector
+- subscriber: posizione e velocità desiderate per l'end effector
+- publisher: posizioni desiderate per i giunti (comandi per gli effort_controllers/JointPositionController)
+
+Librerie da utilizzare:
+- rbdl(riferisi alla documentazione Doxygen online --> https://rbdl.github.io/, alcuni esempi di utilizzo delle principali funzioni sono disponibili qui https://sites.google.com/site/xinsongyan/researches/rbdl-pinnochio)
+- numpy-quaternion (https://github.com/moble/quaternion, documentazione --> https://quaternion.readthedocs.io/en/latest/)
+
+NOTA - Errore di rotazione e utilizzo dei quaternioni
+Definendo:
+q = quaternione di orietazione dell'end-effector
+q_des = quaternione di orientazione desiderata per l'end-effector
+l'errore di rotazione è dato dalla parte VETTORIALE del quaternione
+e_q = q_des ⊗ q*
+Attenzione: la libreria numpy-quaternion fa riferimento alla stessa notazione dei quaternioni usata da Gabiccini, ovvero (w, x, y, z), dove w è la parte scalare e [x y z] la parte vettoriale
+
+NOTA - Modello URDF per RBDL
+Per eseguire la cinematica inversa è sufficiente (e più facile da gestire) solo il modello del braccio, senza gripper. In questo modo tutti i giuti del modello sono da controllare, e non bisogna escludere dei giunti dal Jacobiano. Il modello del solo braccio può essere generato dal file iiwa.xacro all'interno di kuka_iiwa_14_prismatic_gripper/ros
+Per generare il modello, recarsi da terminalli all'interno di kuka_iiwa_14_prismatic_gripper/ros e dare i seguenti comandi da terminale:
+-# rosrun xacro xacro iiwa.xacro > iiwa.urdf
+In seguito, aprire il file e, a mano, commentare via le definizioni di:
+- iiwa_joint_ee
+- iiwa_link_ee
+Questo sarà il modello da importare per creare il modello RBDL.
+
+## GENERAZIONE DELLA TRAIETTORIA
+
+Il nodo dovrà pubblicare uno o più messaggi contenenti le seguenti informazioni 
+- la posa desiderata per l'end-effector (posizione e orientazione)
+- la velocità deisderata per l'end-effector (lineare e angolare)
+- il valore del tempo t in cui si desiderano tale posa e velocità (necessario per Eulero in avanti ella cinematica inversa)
+
+Inizialmente questo nodo pò pubblicare un singolo messaggio contenente una posizione fissa, per testare l'algoritmo di cinematica inversa. Sarà poi modificato per generare una traiettoria più complessa.
+
+Si consiglia di creare un unico messaggio custom, in modo che la pubblicazione sia sincrona; riferirsi al tutorial beginner di ROS per la creazione di un messaggio
