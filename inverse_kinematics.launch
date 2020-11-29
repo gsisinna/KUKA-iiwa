@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="inverse_kinematics" pkg="kuka_iiwa_14_prismatic_gripper" type="inverse_kinematics.py" respawn="false" output="screen">
+  </node>
+
+</launch>
