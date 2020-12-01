@@ -11,11 +11,11 @@
       <arg name="load_robot_description" value="true"/>
     </include>
 
-    <rosparam file="$(find kuka_iiwa_14_prismatic_gripper_config)/config/low_level_controllers.yaml" command="load"/>
+    <rosparam file="$(find kuka_iiwa_14_prismatic_gripper_config)/config/torque_controllers.yaml" command="load"/>
 
     <!-- load the controllers -->
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-      output="screen" args="joint_state_controller iiwa_velocity_controller">
+      output="screen" args="joint_state_controller iiwa_effort_controller iiwa_position_controller">
     </node>
 
     <!-- Run the main MoveIt! executable without trajectory execution (we do not have controllers configured by default) -->
@@ -32,8 +32,9 @@
       respawn="false" output="screen">
     </node>
 
-    <node pkg="kuka_iiwa_14_prismatic_gripper_config" type="grasp_motion.py" name="grasp_motion" args="$(find kuka_iiwa_14_prismatic_gripper_config)/config/trajectories.json"/>
+    <!-- <node pkg="kuka_iiwa_14_prismatic_gripper_config" type="grasp_motion.py" name="grasp_motion" args="$(find kuka_iiwa_14_prismatic_gripper_config)/config/trajectories.json"/> -->
     
+
   </group>
   
   <node pkg="tf" type="static_transform_publisher" name="world_broadcaster" args = "0 0 0 0 0 0 world base_link 10" />

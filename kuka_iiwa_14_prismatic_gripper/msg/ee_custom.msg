@@ -1,0 +1,9 @@
+kuka_iiwa_14_prismatic_gripper/Float64  x
+kuka_iiwa_14_prismatic_gripper/Float64  y
+kuka_iiwa_14_prismatic_gripper/Float64  z
+
+kuka_iiwa_14_prismatic_gripper/Float64  xd
+kuka_iiwa_14_prismatic_gripper/Float64  yd
+kuka_iiwa_14_prismatic_gripper/Float64  zd
+
+kuka_iiwa_14_prismatic_gripper/Float64  time

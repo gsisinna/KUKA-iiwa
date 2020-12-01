@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/iiwa14_gripper::iiwa14.srdf
   CONFIG:
-    author_name: gabriele sisinna
+    author_name: Gabriele Sisinna
     author_email: gabriele.sisinna@gmail.com
-    generated_timestamp: 1605370416
+    generated_timestamp: 1606400792
