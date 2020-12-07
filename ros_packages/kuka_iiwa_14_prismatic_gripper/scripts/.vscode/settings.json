@@ -1,0 +1,19 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/melodic/lib/python2.7/dist-packages",
+        "/home/gabriele/Documents/NRP/retina/build/lib",
+        "/home/gabriele/.local/lib/python2.7/site-packages",
+        "/home/gabriele/.local/lib/x86_64-linux-gnu/python2.7/site-packages",
+        "/home/gabriele/Documents/NRP/GazeboRosPackages/devel/lib/python2.7/dist-packages",
+        "/home/gabriele/Documents/NRP/CLE/hbp_nrp_cle",
+        "/home/gabriele/Documents/NRP/ExperimentControl/hbp_nrp_excontrol",
+        "/home/gabriele/Documents/NRP/ExperimentControl/hbp_nrp_scxml",
+        "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_backend",
+        "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_cleserver",
+        "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_commons",
+        "/home/gabriele/Documents/NRP/ExDBackend/hbp_nrp_watchdog",
+        "/home/gabriele/Documents/NRP/ExDBackend/hbp-flask-restful-swagger-master",
+        "/home/gabriele/Documents/NRP/VirtualCoach/hbp_nrp_virtual_coach",
+        "/home/gabriele/Documents/NRP/BrainSimulation/hbp_nrp_distributed_nest"
+    ]
+}
