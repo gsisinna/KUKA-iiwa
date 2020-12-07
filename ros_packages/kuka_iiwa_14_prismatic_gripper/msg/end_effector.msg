@@ -1,4 +1,6 @@
-string first_name
-string last_name
-uint8 age
-uint32 score
+Header header
+
+float64[] positions
+float64[] velocities
+
+float64 time
