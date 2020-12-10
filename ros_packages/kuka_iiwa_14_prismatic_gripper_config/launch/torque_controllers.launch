@@ -15,7 +15,7 @@
 
     <!-- load the controllers -->
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-      output="screen" args="joint_state_controller iiwa_effort_controller iiwa_position_controller">
+      output="screen" args="joint_state_controller iiwa_position_controller">
     </node>
 
     <!-- Run the main MoveIt! executable without trajectory execution (we do not have controllers configured by default) -->
