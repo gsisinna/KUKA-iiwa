@@ -14,13 +14,13 @@ from kuka_iiwa_14_prismatic_gripper.msg import end_effector
 # float64 time
 
 def talker():
-    pub = rospy.Publisher('ee_data', end_effector, queue_size=100)
+    pub = rospy.Publisher('ee_data', end_effector, queue_size=1)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(100) # 100hz
-    iteration = 0.0
+    iteration = 0
     while not rospy.is_shutdown():
         data = end_effector()
-        data.position = [10.0, 10.0, 10.0, 0.0, 0.0, 0.0] #x,y,z and RPY angles
+        data.position = [0.0, 0.0, 1.0, 0.0, 0.0, 0.0] #x,y,z and RPY angles
         data.velocity = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         data.time = iteration
         rospy.loginfo(data)
