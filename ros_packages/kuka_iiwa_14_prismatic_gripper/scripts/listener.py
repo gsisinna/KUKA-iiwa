@@ -27,7 +27,7 @@ def jointStateCallback(data):
     
     J = np.zeros((6,7))
     h = 0.001
-    K = (1/h) * np.diag(np.full(6,1))
+    K = (2/h) * np.diag(np.full(6,1))
     EE_LOCAL_POS = np.array((0.0,0.0,0.045))
     k=0.0001
     
@@ -42,10 +42,10 @@ def jointStateCallback(data):
     x = rbdl.CalcBodyToBaseCoordinates(model, q, 7, EE_LOCAL_POS)
     xd = rbdl.CalcPointVelocity6D(model, q, qd, 7, EE_LOCAL_POS)
 
-    rospy.loginfo("Posizione End-Effector: %s", x)
+    #rospy.loginfo("Posizione End-Effector: %s", x)
 
     #ORIENTAMENTO --> utilizzare definizione diversa, jacobiano analitico
-    R = rbdl.CalcBodyWorldOrientation(model, q, 7)
+    R = rbdl.CalcBodyWorldOrientation(model, q, 7).T
     # ci vuole .T? R come mi ruota un eventuale vettore? Noi vogliamo da locale a globale.
     # cercare funzione quaternion data la R: from matrix to ?? documentazione quaternion
     
@@ -68,31 +68,33 @@ def jointStateCallback(data):
     
     # EULERO IN AVANTI PER Q: CLIK
     q = q + h * J_inv.dot( xd + K.dot(err) )  #err -> 3 parte vettoriale quat e 3 posizione
+
     
     #rospy.loginfo("Comando da inviare al controllore (q_des): %s", q)
-    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=100)
+    #pub = rospy.Publisher('/iiwa/iiwa_effort_controller/command', Float64MultiArray, queue_size=100)
+    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=10)
     
-    #TEST CON EFFORT CONTROLLER
-    # cmd = Float64MultiArray()
-    # cmd.layout.dim.append(MultiArrayDimension(label='torques',size=7,stride=1))
-    # cmd.data = list(q)
-    # pub.publish(cmd)
-    # rospy.loginfo("Comando inviato")
-
+    
     #POSITION CONTROLLER
     joints_str = JointTrajectory()
     joints_str.header = Header()
     joints_str.header.stamp = rospy.Time.now()
     joints_str.joint_names = ['iiwa_joint_1', 'iiwa_joint_2', 'iiwa_joint_3', 'iiwa_joint_4', 'iiwa_joint_5', 'iiwa_joint_6', 'iiwa_joint_7']
     point = JointTrajectoryPoint()
-    point.positions = [0, 0, 0, 0, 0, 0, 0]
-    #point.positions = [q[0], q[1], q[2], q[3], q[4], q[5], q[6]]
+    #point.positions = [0, 0, 0, 0, 0, 0, 0]
+    point.positions = [q[0], q[1], q[2], q[3], q[4], q[5], q[6]]
     point.time_from_start = rospy.Duration(2)
     joints_str.points.append(point)
     pub.publish(joints_str)
     rospy.loginfo("COMANDO INVIATO: %s", joints_str)
 
-    
+    #TEST CON EFFORT CONTROLLER
+    # cmd = Float64MultiArray()
+    # cmd.layout.dim.append(MultiArrayDimension(label='positions',size=7,stride=1))
+    # cmd.data = list(q)
+    # pub.publish(cmd)
+    # rospy.loginfo("Comando inviato: %s", q)
+
 
 def endEffectorCallback(data):
     global pose_des

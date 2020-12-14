@@ -4,7 +4,7 @@
 
   <group ns="/iiwa">
     
-    <param name="robot_description" textfile="$(arg urdf_path)" /> 
+    <param name="robot_description" textfile="$(find kuka_iiwa_14_prismatic_gripper)/ros/iiwa_gripper.urdf" /> 
 
     <!-- Load joint controller configurations from YAML file to parameter server -->
     <include file="$(find kuka_iiwa_14_prismatic_gripper_config)/launch/planning_context.launch">
