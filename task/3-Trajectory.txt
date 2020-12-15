@@ -1,0 +1,6 @@
+1 - Visualizzazione errore con rqt_plot: immagine e video, posizione neutrale e random
+2 - Video per report in parallelo con l'errore
+3 - Soft tuning per PID, tentativi
+4 - Provare a cambiare la matrice identità per pesare i giunti
+5 - Traiettoria con forme strane: creare una funzione che dato in ingresso il tempo mi butta fuori x_des e xd_des.
+6 - Traiettoria che prende in ingresse il tempo e con una costante K moltiplica il tempo velocizzando, vedi differenza errore tracking.
