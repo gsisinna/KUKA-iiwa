@@ -23,10 +23,11 @@ def talker():
     rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         data = end_effector()
-        data.position = [1.0, 1.0, 1.0, 0.0, 0.0, 1.306] # angular, linear
+        data.position = [0.0, 0.0, 0.0, 0, 0, 1.306] # angular, linear
+        #data.position = pickAndPlace(1)
         #data.position = trigTrajectory(0.1)
         #data.position = Z_cos(0.5)
-        data.velocity = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        #data.velocity = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         data.time = rospy.get_time()
         rospy.loginfo(data)
         pub.publish(data)
@@ -42,9 +43,11 @@ def Z_cos(k):
     trajectory = [0.0, 0.0, 0.0, 0.5, 0.5, cos(2*pi*k*time)+1 ]
     return trajectory
 
-
-
-
+def pickAndPlace(k):
+    time = rospy.get_time()
+    for i in range(0,10,1):
+        trajectory = [0.0, 0.0, 0.0, k*i/10, 0, 0.7]
+        return trajectory
 
 if __name__ == '__main__':
     try:
