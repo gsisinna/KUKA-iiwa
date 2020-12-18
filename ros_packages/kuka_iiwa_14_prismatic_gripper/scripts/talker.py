@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 import numpy as np
 from numpy.random import random
-
+from numpy import sin
+from numpy import cos
+from numpy import pi
 import rospy
 from kuka_iiwa_14_prismatic_gripper.msg import end_effector
-
-sin = np.sin
-cos = np.cos
-pi = np.pi
 
 # Msg structure
 # Header header
@@ -23,31 +21,18 @@ def talker():
     rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         data = end_effector()
-        data.position = [0.0, 0.0, 0.0, 0, 0, 1.306] # angular, linear
-        #data.position = pickAndPlace(1)
-        #data.position = trigTrajectory(0.1)
-        #data.position = Z_cos(0.5)
-        #data.velocity = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        data.position = [0.0, 0.0, 0.0, 0.0, 0.0, 1] # angular, linear
+        data.velocity = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         data.time = rospy.get_time()
-        rospy.loginfo(data)
         pub.publish(data)
         rate.sleep()
         
-def trigTrajectory(k):
+def trigTrajectory(k,s):
     time = rospy.get_time()
-    trajectory = [0.0, 0.0, 0.0, abs(sin(2*pi*k*time)), abs(cos(2*pi*k*time)), 1]
+    trajectory = [0.0, 0.0, 0, s*sin(2*pi*k*time), s*cos(2*pi*k*time), 0.7]
     return trajectory
 
-def Z_cos(k):
-    time = rospy.get_time()
-    trajectory = [0.0, 0.0, 0.0, 0.5, 0.5, cos(2*pi*k*time)+1 ]
-    return trajectory
 
-def pickAndPlace(k):
-    time = rospy.get_time()
-    for i in range(0,10,1):
-        trajectory = [0.0, 0.0, 0.0, k*i/10, 0, 0.7]
-        return trajectory
 
 if __name__ == '__main__':
     try:
