@@ -546,11 +546,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_left_joint">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="gripper_motor_left">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
@@ -559,11 +559,11 @@
     <robotNamespace>/iiwa</robotNamespace>
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="gripper_right_joint">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>-->
     </joint>
     <actuator name="iiwa_motor_right">
-      <hardwareInterface>PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
       <!--<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>-->
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
