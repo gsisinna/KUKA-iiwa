@@ -29,52 +29,38 @@ model = rbdl.loadModel("/home/gabriele/Documents/NRP/GazeboRosPackages/src/kuka_
 # float64[] velocity
 # float64 time
 
-
 def talker():
-    global time
-    pub = rospy.Publisher('ee_data', end_effector, queue_size=100)
-    gripper = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=100)
+    pub = rospy.Publisher('ee_data', end_effector, queue_size=10)
+    #gripper = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(100) # 100hz
+    
+    q0 = np.quaternion(pi/2,0,0,0)
+    q1 = np.quaternion(0,0,0,0)
+
+    q_sl = quaternion.slerp(q0, q1, 0, 5, np.arange(0, 5, 0.01) )
+    q_sl_d = np.diff(q_sl)/0.01
+    omega_vect = q_sl_d
+
+    for i in range(498):
+        omega = -2 * q_sl[i].conjugate() * q_sl_d[i]
+        omega_vect[i] = omega
+
     while not rospy.is_shutdown():
-        data = end_effector()
-        time = rospy.get_time()
-        data.time = time
-        data.position = [0,0,0,0,0,1.305]
-        data.velocity = [0,0,0,0,0,0]
+        for i in range(98):
+            data = end_effector()
+            time = rospy.get_time()
+            data.time = time
 
-        
-        
-        rospy.loginfo(data)
-        rate.sleep()
+            quat_des = quaternion.as_float_array(q_sl[i])
+            omega_des = quaternion.as_float_array(omega_vect[i])
 
-def slerp(v0, v1, t_array):
-    # >>> slerp([1,0,0,0], [0,0,0,1], np.arange(0, 1, 0.001))
-    t_array = np.array(t_array)
-    v0 = np.array(v0)
-    v1 = np.array(v1)
-    
-    dot = np.sum(v0 * v1)
-
-    if dot < 0.0:
-        v1 = -1 * v1
-        dot = -1 * dot
-    
-    DOT_THRESHOLD = 0.9995
-    if dot > DOT_THRESHOLD:
-        result = v0[np.newaxis,:] + t_array[:,np.newaxis] * (v1 - v0)[np.newaxis,:]
-        return (result.T / np.linalg.norm(result, axis=1)).T
-    
-    theta_0 = np.arccos(dot)
-    sin_theta_0 = sin(theta_0)
-
-    theta = theta_0 * t_array
-    sin_theta = sin(theta)
-    
-    s0 = np.cos(theta) - dot * sin_theta / sin_theta_0
-    s1 = sin_theta / sin_theta_0
-    return (s0[:,np.newaxis] * v0[np.newaxis,:]) + (s1[:,np.newaxis] * v1[np.newaxis,:])
-
+            data.position = [quat_des[0], quat_des[1], quat_des[2], 0, 0, 1.2]
+            data.velocity = [omega_des[0], omega_des[1], omega_des[2], 1, 1, 1]
+            
+            pub.publish(data)
+            rospy.loginfo(data)
+            rate.sleep()
 
 
 if __name__ == '__main__':
