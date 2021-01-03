@@ -30,13 +30,13 @@ def jointStateCallback(data):
     global qd
 
     J = np.zeros((6,7))
-    alpha = 10
-    h = 0.01                                           #dt
-    K = (1.5/h) * np.diag(np.full(6,1))                  #Stability for eigenvalus < 2/h
+    alpha = 5
+    h = 0.01                                             #dt
+    K = (1.8/h) * np.diag(np.full(6,1))                  #Stability for eigenvalus < 2/h
     EE_LOCAL_POS = np.array((0.0,0.0,0.045))
-    k = 0.0001                                          #Damped least square method
+    k = 0.001                                           #Damped least square method
 
-    # q = [gripper_left_joint, gripper_right_joint, iiwa_joint_1, iiwa_joint_2, iiwa_joint_3, iiwa_joint_4, iiwa_joint_5, iiwa_joint_6, iiwa_joint_7]
+    ## q = [gripper_left_joint, gripper_right_joint, iiwa_joint_1, iiwa_joint_2, iiwa_joint_3, iiwa_joint_4, iiwa_joint_5, iiwa_joint_6, iiwa_joint_7]
     
     q = data.position[2:]
     q = np.asarray(q)
@@ -49,13 +49,14 @@ def jointStateCallback(data):
 
     #CALCOLO POSIZIONE DELL'END-EFFECTOR
     x = rbdl.CalcBodyToBaseCoordinates(model, q, 7, EE_LOCAL_POS)  #x,y,z
-    xd = rbdl.CalcPointVelocity6D(model, q, qd, 7, EE_LOCAL_POS)   #vx,vy,vz,wx,wy,wx
+    #xd = rbdl.CalcPointVelocity6D(model, q, qd, 7, EE_LOCAL_POS)   #vx,vy,vz,wx,wy,wx
 
-    #Orientation
+    #ORIENTAZIONE
     R = rbdl.CalcBodyWorldOrientation(model, q, 7).T
     quat = quaternion.from_rotation_matrix(R)
+
     quat_des = quaternion.from_euler_angles(pose_des[0], pose_des[1], pose_des[2])
-    quat_des.normalized()
+
     err_quat = quat_des * quat.conjugate()
     err_quat = quaternion.as_float_array(err_quat)
     
@@ -74,7 +75,6 @@ def jointStateCallback(data):
     I = 1 * np.diag(np.full(6,1))
     
     J_inv = J.T.dot(inv( J.dot(J.transpose()) + (k**2) * I + w * np.diag(np.full(6,1))))
-    
     #J_inv = J.T.dot(inv( J.dot(J.transpose()) + (k**2) * I ))
 
     
@@ -86,18 +86,19 @@ def jointStateCallback(data):
     #rqt_plot for the error
     pub_error = rospy.Publisher('/iiwa/iiwa_position_controller/error', Float64, queue_size=10)
     pub_error.publish(norm(err))
-    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=10)
     
     #POSITION CONTROLLER
+    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=10)
+    
     joints_str = JointTrajectory()
     joints_str.header = Header()
     joints_str.header.stamp = rospy.Time.now()
     joints_str.joint_names = ['iiwa_joint_1', 'iiwa_joint_2', 'iiwa_joint_3', 'iiwa_joint_4', 'iiwa_joint_5', 'iiwa_joint_6', 'iiwa_joint_7']
 
     point = JointTrajectoryPoint()
-    point.positions = [ q[0], q[1], q[2], q[3], q[4], q[5], q[6] ]
-    point.velocities = [ qd[0], qd[1], qd[2], qd[3], qd[4], qd[5], qd[6] ]
-    point.time_from_start = rospy.Duration(5)
+    point.positions = [q[0], q[1], q[2], q[3], q[4], q[5], q[6] ]
+    #point.velocities = [ qd[0], qd[1], qd[2], qd[3], qd[4], qd[5], qd[6] ]
+    point.time_from_start = rospy.Duration(2)
     joints_str.points.append(point)
     pub.publish(joints_str)
     rospy.loginfo(joints_str)
@@ -117,7 +118,6 @@ if __name__ == '__main__':
     q = np.zeros(7)
     q_old = np.zeros(7)
     qd = np.zeros(7)
-
 
     rospy.init_node('listener', anonymous=True)
     rospy.Subscriber('/ee_data', end_effector, endEffectorCallback)
