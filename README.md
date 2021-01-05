@@ -1,2 +1,2 @@
-# labtraining
-Materiale generato durante il lab training.
+# Lab Training: Control of a redundant simulated robotic armby using a ROS interface
+Il task scelto per le 75h di lab training riguarda il controllo di un manipolatore robotico a 7 DOF (Kuka iiwa arm prismatic gripper) utilizzando un'interfaccia basata su ROS e Python. Il tutto è stato implementato e testato nel simulatore (Gazebo) integrato nella Neurorobotics Platform, una piattaforma per lo sviluppo e simulazione di esperimenti di neurorobotica.
