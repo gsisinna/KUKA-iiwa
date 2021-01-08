@@ -1,3 +1,5 @@
+## Some test with numpy slerp
+
 import numpy as np
 from numpy import pi
 
