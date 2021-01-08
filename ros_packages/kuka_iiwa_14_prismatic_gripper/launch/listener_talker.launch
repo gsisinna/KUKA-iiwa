@@ -1,4 +1,0 @@
-<launch>
-    <node name="listener_node" pkg="kuka_iiwa_14_prismatic_gripper" type="listener.py" output="screen"/>
-    <node name="talker_node" pkg="kuka_iiwa_14_prismatic_gripper" type="talker.py" output="screen"/>
-</launch>

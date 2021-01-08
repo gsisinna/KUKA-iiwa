@@ -5,6 +5,7 @@ import rospy
 from kuka_iiwa_14_prismatic_gripper.msg import end_effector
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray, MultiArrayDimension
+
 from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from std_msgs.msg import Header
 from std_msgs.msg import Duration
@@ -20,9 +21,12 @@ from numpy import pi
 from numpy.linalg import inv
 from numpy.linalg import norm
 from numpy.random import random
+
 import quaternion
 
+#Callback function for joint position update
 def jointStateCallback(data):
+    #global variables shared between functions
     global pose_des
     global vel_des
     global q
@@ -30,13 +34,13 @@ def jointStateCallback(data):
     global qd
 
     J = np.zeros((6,7))
-    alpha = 5
     h = 0.01                                             #dt
-    K = (1.5/h) * np.diag(np.full(6,1))                  #Stability for eigenvalus < 2/h
-    EE_LOCAL_POS = np.array((0.0,0.0,0.045))
-    k = 0.001                                           #Damped least square method
+    K = (0.1/h) * np.eye(6)                              #Stability for < 2/h
+    EE_LOCAL_POS = np.array((0.0,0.0,0.045))             #Local offset
+    k = 0.0001                                           #Damped least square method
 
-    ## q = [gripper_left_joint, gripper_right_joint, iiwa_joint_1, iiwa_joint_2, iiwa_joint_3, iiwa_joint_4, iiwa_joint_5, iiwa_joint_6, iiwa_joint_7]
+    ## JointState msg
+    ##  q = [gripper_left_joint, gripper_right_joint, iiwa_joint_1, iiwa_joint_2, iiwa_joint_3, iiwa_joint_4, iiwa_joint_5, iiwa_joint_6, iiwa_joint_7]
     
     q = data.position[2:]
     q = np.asarray(q)
@@ -47,67 +51,67 @@ def jointStateCallback(data):
     qd = np.asarray(qd)
 
 
-    #CALCOLO POSIZIONE DELL'END-EFFECTOR
-    x = rbdl.CalcBodyToBaseCoordinates(model, q, 7, EE_LOCAL_POS)  #x,y,z
-    rospy.loginfo("Posizione EE: %s", x)
+    #End-Effector Position
+    x = rbdl.CalcBodyToBaseCoordinates(model, q, 7, EE_LOCAL_POS, True)  #x,y,z
 
-    #ORIENTAZIONE
-    R = rbdl.CalcBodyWorldOrientation(model, q, 7).T
+    #Orientation
+    R = rbdl.CalcBodyWorldOrientation(model, q, 7, True).T
+    #From rotation matrix to quaternion
     quat = quaternion.from_rotation_matrix(R)
-
+    #Input as euler angles for orientation
     quat_des = quaternion.from_euler_angles(pose_des[0], pose_des[1], pose_des[2])
-
-    err_quat = quat_des * quat.conjugate()
-    err_quat = quaternion.as_float_array(err_quat)
-    
+    #Angular error
+    err_ang = quat_des * quat.conjugate()
+    err_ang = quaternion.as_float_array(err_ang)
+    #Linear error
     err_lin = np.array(([pose_des[3]-x[0], pose_des[4]-x[1], pose_des[5]-x[2]]))
 
-    #ERRORE (angular-linear)
-    err = np.array(([ err_quat[1], err_quat[2], err_quat[3], err_lin[0], err_lin[1], err_lin[2] ]))
-    rospy.loginfo("ERRORE: %s", norm(err) )
+    #Total Error
+    err = np.array(([ err_ang[1], err_ang[2], err_ang[3], err_lin[0], err_lin[1], err_lin[2] ]))
     
-    # CALCOLO JACOBIANO ANGULAR_LINEAR
+    # Jacobian (angular-linear)
     rbdl.CalcPointJacobian6D(model, q, 7, EE_LOCAL_POS, J)
     
-    # INVERSA + DAMPING (IMPROVED)
-    l = 0.2 #lunghezza caratteristica dei link
-    w = 1e-4 * l**3
-    I = 1 * np.diag(np.full(6,1))
+    # Jacobian Inverse (Damped)
+    J_inv = J.T.dot(inv( J.dot(J.transpose()) + (k**2) * I))
     
-    J_inv = J.T.dot(inv( J.dot(J.transpose()) + (k**2) * I + w * np.diag(np.full(6,1))))
-    #J_inv = J.T.dot(inv( J.dot(J.transpose()) + (k**2) * I ))
-
+    #CLIK: Closed Loop Inverse Kinematics
+    q = q_old + h * J_inv.dot( vel_des + K.dot(err) )
+    qd = J_inv.dot(vel_des + K.dot(err))
     
-    #CLIK
-    q = q_old + h * alpha * J_inv.dot( vel_des + K.dot(err) )
-    #qd = J_inv.dot(vel_des + K.dot(err))
-    qd = (q - q_old) / h
-    
-    q = (q-q_old)/2
-
-    #rqt_plot for the error
-    pub_error = rospy.Publisher('/iiwa/iiwa_position_controller/error', Float64, queue_size=100)
+    #rqt_plot for error
+    pub_error = rospy.Publisher('/iiwa/iiwa_position_controller/error', Float64, queue_size=10)
     pub_error.publish(norm(err))
     
     #POSITION CONTROLLER
-    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=100)
+    pub = rospy.Publisher('/iiwa/iiwa_position_controller/command', JointTrajectory, queue_size=10)
     
+    #JointTrajectory msg generation
     joints_str = JointTrajectory()
     joints_str.header = Header()
     joints_str.header.stamp = rospy.Time.now()
     joints_str.joint_names = ['iiwa_joint_1', 'iiwa_joint_2', 'iiwa_joint_3', 'iiwa_joint_4', 'iiwa_joint_5', 'iiwa_joint_6', 'iiwa_joint_7']
 
+    #I'll use a single waypoint with the q[] values calculated with CLIK
     point = JointTrajectoryPoint()
     point.positions = [ q[0], q[1], q[2], q[3], q[4], q[5], q[6] ]
     point.velocities = [ qd[0], qd[1], qd[2], qd[3], qd[4], qd[5], qd[6] ]
-    point.time_from_start = rospy.Duration(4)
+    point.time_from_start = rospy.Duration(3)
     joints_str.points.append(point)
     pub.publish(joints_str)
-    rospy.loginfo(joints_str)
 
+    #Gripper Controller
+    pub_left = rospy.Publisher('/iiwa/gripper_left_position_controller/command', Float64, queue_size=10)
+    pub_right = rospy.Publisher('/iiwa/gripper_right_position_controller/command', Float64, queue_size=10)
+
+    #Open Position
+    pub_left.publish(0)
+    pub_right.publish(0)
+
+    rate.sleep()
     q_old = q
 
-
+#Callback function for end-effector desired position
 def endEffectorCallback(data):
     global pose_des
     global vel_des

@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+#Mathematical libraries
 import numpy as np
 from numpy.random import random
 from numpy import sin
 from numpy import cos
 from numpy import pi
 
+#Rospy and msg definitions
 import rospy
 from kuka_iiwa_14_prismatic_gripper.msg import end_effector
 from sensor_msgs.msg import JointState
@@ -21,7 +23,7 @@ import quaternion
 import rbdl
 model = rbdl.loadModel("/home/gabriele/Documents/NRP/GazeboRosPackages/src/kuka_iiwa_14_prismatic_gripper/scripts/iiwa.urdf")
 
-# Msg structure
+# Msg "end_effector.msg" structure
 # Header header
 
 # float64[] orientation (euler angles) - position
@@ -29,15 +31,11 @@ model = rbdl.loadModel("/home/gabriele/Documents/NRP/GazeboRosPackages/src/kuka_
 # float64 time
 
 def talker():
-    pub = rospy.Publisher('ee_data', end_effector, queue_size=100)
-    gripper_left = rospy.Publisher('/iiwa/gripper_left_effort_controller/command', Float64, queue_size=100)
-    gripper_right = rospy.Publisher('/iiwa/gripper_right_effort_controller/command', Float64, queue_size=100)
-
+    pub = rospy.Publisher('ee_data', end_effector, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(100) # 100hz
-    dt = 0.01
 
-    #Quaternioni per l'orientazione dell'end-effector durante pick and place
+    #Quaternion for example orientation
     q0 = quaternion.from_spherical_coords(0,0)
     q1 = quaternion.from_spherical_coords(pi,0)
     q2 = quaternion.from_spherical_coords(pi/2,0)
@@ -46,55 +44,62 @@ def talker():
         data = end_effector()
         time = rospy.get_time()
         data.time = time
+        
+        #Modify next value will change end-effector position and velocity
+        data.position = [0,0,0,0,0,0.7]
+        data.velocity = [1,1,1,1,1,1]
+        pub.publish(data)
+        rate.sleep()
 
-        if time<10:
-            q_sl = quaternion.slerp(q0, q1, 0, 10, time)
-            q_sl_old = quaternion.slerp(q0, q1, -1, 10, time-1)
-            q_sl_d = (q_sl - q_sl_old)/dt
+        ##Some test for trajectory execution
+
+        # if time<10:
+        #     q_sl = quaternion.slerp(q0, q1, 0, 10, time)
+        #     q_sl_old = quaternion.slerp(q0, q1, -1, 10, time-1)
+        #     q_sl_d = (q_sl - q_sl_old)/dt
             
-            w_sl = -2 * q_sl.conjugate() * q_sl_d
-            w_sl = quaternion.as_float_array(w_sl)
+        #     w_sl = -2 * q_sl.conjugate() * q_sl_d
+        #     w_sl = quaternion.as_float_array(w_sl)
             
-            q_sl = quaternion.as_euler_angles(q_sl)
+        #     q_sl = quaternion.as_euler_angles(q_sl)
             
-            data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0.7, 0.4]
-            data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
+        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0.7, 0.4]
+        #     data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
             
-            pub.publish(data)
-            gripper_right.publish(50)
-            gripper_left.publish(50)
-            ## Inserire temporizzazione chiusura gripper qui
+        #     pub.publish(data)
+        #     gripper_right.publish(50)
+        #     gripper_left.publish(50)
             
-            rate.sleep()
+        #     rate.sleep()
 
 
-        elif time>=10 and time<20:
-            q_sl = quaternion.slerp(q1, q2, 10, 20, time)
-            q_sl_old = quaternion.slerp(q1, q2, 10, 20, time-1)
+        # elif time>=10 and time<20:
+        #     q_sl = quaternion.slerp(q1, q2, 10, 20, time)
+        #     q_sl_old = quaternion.slerp(q1, q2, 10, 20, time-1)
 
-            q_sl_d = (q_sl - q_sl_old)/dt
+        #     q_sl_d = (q_sl - q_sl_old)/dt
             
-            w_sl = -2 * q_sl.conjugate() * q_sl_d
-            w_sl = quaternion.as_float_array(w_sl)
+        #     w_sl = -2 * q_sl.conjugate() * q_sl_d
+        #     w_sl = quaternion.as_float_array(w_sl)
             
-            q_sl = quaternion.as_euler_angles(q_sl)
+        #     q_sl = quaternion.as_euler_angles(q_sl)
             
-            data.position = [q_sl[0], q_sl[1], q_sl[2], 0.7, 0, 0.4]
-            data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
+        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0.7, 0, 0.4]
+        #     data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
             
-            pub.publish(data)
-            rate.sleep()
+        #     pub.publish(data)
+        #     rate.sleep()
 
-        else:
-            q_sl = quaternion.as_euler_angles(q0)
+        # else:
+        #     q_sl = quaternion.as_euler_angles(q0)
 
-            data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0, 1.2]
-            data.velocity = [0,0,0,0,0,0]
+        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0, 1.2]
+        #     data.velocity = [0,0,0,0,0,0]
 
-            pub.publish(data)
-            gripper_right.publish(0)
-            gripper_left.publish(0)
-            rate.sleep()
+        #     pub.publish(data)
+        #     gripper_right.publish(0)
+        #     gripper_left.publish(0)
+        #     rate.sleep()
 
 
 
