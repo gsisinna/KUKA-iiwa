@@ -35,10 +35,11 @@ def jointStateCallback(data):
 
     J = np.zeros((6,7))
     h = 0.01                                             #dt
-    K = (0.1/h) * np.eye(6)                              #Stability for < 2/h
+    K = (2/h) * np.eye(6)                              #Stability for < 2/h
     EE_LOCAL_POS = np.array((0.0,0.0,0.045))             #Local offset
-    k = 0.0001                                           #Damped least square method
-
+    k = 0.001                                           #Damped least square method
+    I = np.eye(6)
+    
     ## JointState msg
     ##  q = [gripper_left_joint, gripper_right_joint, iiwa_joint_1, iiwa_joint_2, iiwa_joint_3, iiwa_joint_4, iiwa_joint_5, iiwa_joint_6, iiwa_joint_7]
     
@@ -95,8 +96,8 @@ def jointStateCallback(data):
     #I'll use a single waypoint with the q[] values calculated with CLIK
     point = JointTrajectoryPoint()
     point.positions = [ q[0], q[1], q[2], q[3], q[4], q[5], q[6] ]
-    point.velocities = [ qd[0], qd[1], qd[2], qd[3], qd[4], qd[5], qd[6] ]
-    point.time_from_start = rospy.Duration(3)
+    #point.velocities = [ qd[0], qd[1], qd[2], qd[3], qd[4], qd[5], qd[6] ]
+    point.time_from_start = rospy.Duration(1)
     joints_str.points.append(point)
     pub.publish(joints_str)
 

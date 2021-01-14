@@ -44,64 +44,58 @@ def talker():
         data = end_effector()
         time = rospy.get_time()
         data.time = time
-        
-        #Modify next value will change end-effector position and velocity
-        data.position = [0,0,0,0,0,0.7]
-        data.velocity = [1,1,1,1,1,1]
-        pub.publish(data)
-        rate.sleep()
+        dt = 0.1
+        # #Modify next value will change end-effector position and velocity
+        # data.position = [0,0,0,0,0,0.7]
+        # data.velocity = [1,1,1,1,1,1]
+        # pub.publish(data)
+        # rospy.loginfo(data)
+        # rate.sleep()
 
-        ##Some test for trajectory execution
+        #Some test for trajectory execution
 
-        # if time<10:
-        #     q_sl = quaternion.slerp(q0, q1, 0, 10, time)
-        #     q_sl_old = quaternion.slerp(q0, q1, -1, 10, time-1)
-        #     q_sl_d = (q_sl - q_sl_old)/dt
+        if time<10:
+            q_sl = quaternion.slerp(q0, q1, 0, 10, time)
+            q_sl_old = quaternion.slerp(q0, q1, 0, 10, time-1)
+            q_sl_d = (q_sl - q_sl_old)/dt
             
-        #     w_sl = -2 * q_sl.conjugate() * q_sl_d
-        #     w_sl = quaternion.as_float_array(w_sl)
+            w_sl = -2 * q_sl.conjugate() * q_sl_d
+            w_sl = quaternion.as_float_array(w_sl)
             
-        #     q_sl = quaternion.as_euler_angles(q_sl)
+            q_sl = quaternion.as_euler_angles(q_sl)
             
-        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0.7, 0.4]
-        #     data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
+            data.position = [0,0,0, 0.5, 0.5, 0.5]
+            data.velocity = [10,10,10,10,10,10]
             
-        #     pub.publish(data)
-        #     gripper_right.publish(50)
-        #     gripper_left.publish(50)
-            
-        #     rate.sleep()
+            pub.publish(data)
+            rate.sleep()
 
 
-        # elif time>=10 and time<20:
-        #     q_sl = quaternion.slerp(q1, q2, 10, 20, time)
-        #     q_sl_old = quaternion.slerp(q1, q2, 10, 20, time-1)
+        elif time>=10 and time<20:
+            q_sl = quaternion.slerp(q1, q2, 10, 20, time)
+            q_sl_old = quaternion.slerp(q1, q2, 10, 20, time-1)
 
-        #     q_sl_d = (q_sl - q_sl_old)/dt
+            q_sl_d = (q_sl - q_sl_old)/dt
             
-        #     w_sl = -2 * q_sl.conjugate() * q_sl_d
-        #     w_sl = quaternion.as_float_array(w_sl)
+            w_sl = -2 * q_sl.conjugate() * q_sl_d
+            w_sl = quaternion.as_float_array(w_sl)
             
-        #     q_sl = quaternion.as_euler_angles(q_sl)
+            q_sl = quaternion.as_euler_angles(q_sl)
             
-        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0.7, 0, 0.4]
-        #     data.velocity = [w_sl[1], w_sl[2], w_sl[3], 10, 10, 10]
+            data.position = [0,0,0, 0, 0, 1]
+            data.velocity = [10,10,10, 10, 10, 10]
             
-        #     pub.publish(data)
-        #     rate.sleep()
+            pub.publish(data)
+            rate.sleep()
 
-        # else:
-        #     q_sl = quaternion.as_euler_angles(q0)
+        else:
+            q_sl = quaternion.as_euler_angles(q0)
 
-        #     data.position = [q_sl[0], q_sl[1], q_sl[2], 0, 0, 1.2]
-        #     data.velocity = [0,0,0,0,0,0]
+            data.position = [0,0,0, 0, 0, 1.2]
+            data.velocity = [0,0,0,0,0,0]
 
-        #     pub.publish(data)
-        #     gripper_right.publish(0)
-        #     gripper_left.publish(0)
-        #     rate.sleep()
-
-
+            pub.publish(data)
+            rate.sleep()
 
 
 if __name__ == '__main__':
