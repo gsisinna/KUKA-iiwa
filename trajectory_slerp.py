@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ##Some test with numpy slerp
+=======
+## Some test with numpy slerp
+>>>>>>> main
 
 import numpy as np
 from numpy import pi
