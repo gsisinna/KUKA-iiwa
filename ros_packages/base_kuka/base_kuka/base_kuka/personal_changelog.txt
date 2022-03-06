@@ -1,7 +1,0 @@
-Change log
-
-# kuka_iiwa_14_[...]_config
-
-### iiwa_gripper.urdf 
-
-1. Subtituted all "PositionJointInterface" with "EffortJointInterface"

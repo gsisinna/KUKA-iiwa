@@ -1,5 +1,0 @@
-<ns1:bibi 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns:ns1="http://schemas.humanbrainproject.eu/SP10/2014/BIBI" >
-  <ns1:bodyModel robotId="robot">kuka_iiwa_14_prismatic_gripper/model.sdf</ns1:bodyModel>
-</ns1:bibi>
