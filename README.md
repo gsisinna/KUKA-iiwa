@@ -1,5 +1,4 @@
 # Lab Training: Control of a redundant simulated robotic arm by using a ROS interface
-Durante questo lab training è stato approfondito il controllo di un manipolatore robotico a 7 GDL (Kuka
-iiwa) utilizzando un’interfaccia basata su ROS e Python. Il tutto è stato implementato e testato con il
-simulatore (Gazebo) integrato nella Neurorobotics Platform, un framework per la simulazione di esperimenti
-di neurorobotica.
+During this lab training, the control of a 7 DOF robotic manipulator (Kuka iiwa) was investigated using an interface based on ROS and Python. This was implemented and tested with the simulator (Gazebo) integrated into the Neurorobotics Platform, a framework for simulating neurorobotics experiments.
+
+See https://neurorobotics.net/
